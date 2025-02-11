@@ -10,11 +10,14 @@ const GoogleLoginButton = () => {
 
       if (data.url) {
         const popup = window.open(data.url, "Google Login", "width=500,height=600");
-        const messageListener = (event) => {
+        const messageListener = (event) => {            
           if (event.data.success) {
-            console.log("User authenticated:", event.data.user);
+            console.log("User authenticated:", event.data.token);
             setIsAuthenticated(true); // Update state to reflect authentication
             popup.close(); // Close the popup automatically
+          }else if(event.data.success === false){
+            popup.close();
+            alert(event.data.message);
           }
         };
         window.addEventListener("message", messageListener);
@@ -31,7 +34,7 @@ const GoogleLoginButton = () => {
       onClick={handleGoogleLogin}
       style={{
         padding: "10px 20px",
-        backgroundColor: "#4285F4",
+        backgroundColor: isAuthenticated ? "green" : "#4285F4",
         color: "white",
         border: "none",
         borderRadius: "5px",
