@@ -3,9 +3,9 @@ import React, { useState } from "react";
 const GoogleLoginButton = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = async () => {    
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/v1/auth/google");
+      const response = await fetch(process.env.REACT_APP_GOOGLE_LOGIN_URL);
       const data = await response.json();
 
       if (data.data.url) {
