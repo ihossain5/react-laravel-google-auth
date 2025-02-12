@@ -8,8 +8,8 @@ const GoogleLoginButton = () => {
       const response = await fetch("http://127.0.0.1:8000/api/v1/auth/google");
       const data = await response.json();
 
-      if (data.url) {
-        const popup = window.open(data.url, "Google Login", "width=500,height=600");
+      if (data.data.url) {
+        const popup = window.open(data.data.url, "Google Login", "width=500,height=600");
         const messageListener = (event) => {            
           if (event.data.success) {
             console.log("User authenticated:", event.data.token);
