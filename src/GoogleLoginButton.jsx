@@ -5,10 +5,12 @@ const GoogleLoginButton = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
     setError(""); // Clear any previous errors
+    setSuccessMessage(""); // Clear any previous success message
     try {
       const response = await fetch(process.env.REACT_APP_GOOGLE_LOGIN_URL);
       const data = await response.json();
@@ -19,6 +21,7 @@ const GoogleLoginButton = () => {
           if (event.data.success) {
             console.log("User authenticated:", event.data.token);
             setIsAuthenticated(true);
+            setSuccessMessage("Successfully signed in!");
             popup.close();
           } else if (event.data.success === false) {
             popup.close();
@@ -63,6 +66,14 @@ const GoogleLoginButton = () => {
             </span>
           )}
         </button>
+        {successMessage && (
+          <div className="success-message">
+            <svg className="success-icon" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            {successMessage}
+          </div>
+        )}
         {error && (
           <div className="error-message">
             <svg className="error-icon" viewBox="0 0 24 24">
