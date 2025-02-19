@@ -19,7 +19,7 @@ const GoogleLoginButton = () => {
         const popup = window.open(data.data.url, "Google Login", "width=500,height=600");
         const messageListener = (event) => {
           if (event.data.success) {
-            console.log("User authenticated:", event.data.token);
+            console.log("User authenticated:", event.data);
             setIsAuthenticated(true);
             setSuccessMessage("Successfully signed in!");
             popup.close();
