@@ -28,6 +28,8 @@ const GoogleLoginButton = () => {
             setError(event.data.message || "Authentication failed");
           }
           setIsLoading(false);
+          window.removeEventListener("message", messageListener);
+          console.log(event.data);
         };
         window.addEventListener("message", messageListener);
       } else {
