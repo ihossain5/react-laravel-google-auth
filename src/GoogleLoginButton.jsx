@@ -31,14 +31,14 @@ const GoogleLoginButton = () => {
           window.removeEventListener("message", messageListener);
           console.log(event.data);
         };
-        window.addEventListener("message", messageListener);
+        // window.addEventListener("message", messageListener);
       } else {
         console.error("No URL returned from backend");
         setError("Unable to initialize login. Please try again.");
         setIsLoading(false);
       }
     } catch (error) {
-      console.error("Error during Google login:", error);
+      console.error("Error during Google login:", error.message);
       setError("Something went wrong. Please try again later.");
       setIsLoading(false);
     }
