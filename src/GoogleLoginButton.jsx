@@ -11,36 +11,43 @@ const GoogleLoginButton = () => {
     setIsLoading(true);
     setError(""); // Clear any previous errors
     setSuccessMessage(""); // Clear any previous success message
-    try {
-      const response = await fetch(process.env.REACT_APP_GOOGLE_LOGIN_URL);
-      const data = await response.json();
+    // try {
+    //   const response = await fetch(process.env.REACT_APP_GOOGLE_LOGIN_URL);
+    //   const data = await response.json();
 
-      if (data.data.url) {
-        const popup = window.open(data.data.url, "Google Login", "width=500,height=600");
-        const messageListener = (event) => {
-          if (event.data.success) {
-            console.log("User authenticated:", event.data);
-            setIsAuthenticated(true);
-            setSuccessMessage("Successfully signed in!");
-            popup.close();
-          } else if (event.data.success === false) {
-            popup.close();
-            setError(event.data.message || "Authentication failed");
-          }
-          setIsLoading(false);
-          window.removeEventListener("message", messageListener);
-          console.log(event.data);
-        };
-        // window.addEventListener("message", messageListener);
-      } else {
-        console.error("No URL returned from backend");
-        setError("Unable to initialize login. Please try again.");
-        setIsLoading(false);
-      }
+    //   if (data.data.url) {
+    //     const popup = window.open(data.data.url, "Google Login", "width=500,height=600");
+    //     const messageListener = (event) => {
+    //       if (event.data.success) {
+    //         console.log("User authenticated:", event.data);
+    //         setIsAuthenticated(true);
+    //         setSuccessMessage("Successfully signed in!");
+    //         popup.close();
+    //       } else if (event.data.success === false) {
+    //         popup.close();
+    //         setError(event.data.message || "Authentication failed");
+    //       }
+    //       setIsLoading(false);
+    //       window.removeEventListener("message", messageListener);
+    //       console.log(event.data);
+    //     };
+    //     // window.addEventListener("message", messageListener);
+    //   } else {
+    //     console.error("No URL returned from backend");
+    //     setError("Unable to initialize login. Please try again.");
+    //     setIsLoading(false);
+    //   }
+    // } catch (error) {
+    //   console.error("Error during Google login:", error.message);
+    //   setError("Something went wrong. Please try again later.");
+    //   setIsLoading(false);
+    // }
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+      const data = await response.json();
+      console.log("Test API Response:", data);
     } catch (error) {
-      console.error("Error during Google login:", error.message);
-      setError("Something went wrong. Please try again later.");
-      setIsLoading(false);
+      console.error("Test API failed:", error);
     }
   };
 
