@@ -38,7 +38,7 @@ const GoogleLoginButton = () => {
         setIsLoading(false);
       }
     } catch (error) {
-      console.error("Error during Google login:", error);
+      console.error("Error during Google login:", { response, data, error });
       setError("Something went wrong. Please try again later.");
       setIsLoading(false);
     }
